@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images" href="assets/images/favicon.png" />
+    <title>С Днем Рождения!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="cards-grid" id="cardsGrid">
+        </div>
+        
+        <div class="safe-container">
+    <div class="safe" id="safe">
+        <div class="safe-door" id="safeDoor">
+           <div class="safe-handle" id="safeHandle" onclick="checkCode()"></div>
+            
+            <div class="combination-wheel">
+                <div class="wheel-markers">
+                    <div class="marker"></div>
+                    <div class="marker"></div>
+                    <div class="marker"></div>
+                    <div class="marker"></div>
+                </div>
+                <div class="wheel-center"></div>
+            </div>
+            
+            <div class="safe-display">
+                <div class="code-display" id="codeDisplay">_ _ _ _</div>
+                <div class="display-glow"></div>
+            </div>
+            
+            <div class="safe-bolts">
+                <div class="bolt"></div>
+                <div class="bolt"></div>
+                <div class="bolt"></div>
+                <div class="bolt"></div>
+            </div>
+        </div>
+        
+        <div class="safe-inside" id="safeInside">
+            <div class="safe-shelves">
+                <div class="shelf"></div>
+                <div class="shelf"></div>
+            </div>
+            <div class="gift-message">
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <div class="confetti"></div>
+                <h2>Поздравляю! 🎉</h2>
+                <p><span id="giftText"></span></p>
+                <button onclick="resetGame()" class="reset-btn">Начать заново</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal" id="taskModal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2 id="modalTitle">Задание</h2>
+                <p id="modalDescription"></p>
+                <div class="task-actions">
+                    <input type="text" id="taskAnswer" placeholder="Введите ответ...">
+                    <button onclick="submitTask()">Отправить</button>
+                </div>
+                <div id="taskResult"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
