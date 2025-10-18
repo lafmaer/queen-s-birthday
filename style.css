@@ -30,12 +30,7 @@ h1 {
 
 /* Стили для сейфа */
 .safe-container {
-    margin: 17vh auto 0;
-}
-
-/* Стили для сейфа */
-.safe-container {
-    margin: 40px auto;
+    margin: 22vh auto 40px;
     position: relative;
 }
 
