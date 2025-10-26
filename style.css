@@ -352,11 +352,99 @@ h1 {
     }
 }
 
+/* Контейнер для конфетти */
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+/* Стили для отдельных конфетти */
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    animation: confetti-fall 5s ease-in forwards;
+}
+
+/* Разные формы конфетти */
+.confetti-piece.circle {
+    border-radius: 50%;
+}
+
+.confetti-piece.square {
+    border-radius: 2px;
+}
+
+.confetti-piece.triangle {
+    width: 0;
+    height: 0;
+    background: transparent !important;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.confetti-piece.rectangle {
+    width: 15px;
+    height: 5px;
+    border-radius: 1px;
+}
+
+/* Анимация падения конфетти */
+@keyframes confetti-fall {
+    0% {
+        opacity: 1;
+        transform: translateY(-100px) rotate(0deg) scale(1);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg) scale(0.5);
+    }
+}
+
+/* Вариации анимации для разных конфетти */
+.confetti-piece:nth-child(5n) {
+    animation-duration: 4s;
+    animation-delay: 0.5s;
+}
+
+.confetti-piece:nth-child(5n+1) {
+    animation-duration: 6s;
+    animation-delay: 0.2s;
+}
+
+.confetti-piece:nth-child(5n+2) {
+    animation-duration: 5.5s;
+    animation-delay: 0.8s;
+}
+
+.confetti-piece:nth-child(5n+3) {
+    animation-duration: 4.5s;
+    animation-delay: 0.1s;
+}
+
+.confetti-piece:nth-child(5n+4) {
+    animation-duration: 5s;
+    animation-delay: 0.6s;
+}
+
 /* Сообщение о подарке */
 .gift-message {
     position: relative;
     background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
+    padding: 15px;
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -366,7 +454,7 @@ h1 {
 .gift-message h2 {
     color: #8B4513;
     margin-bottom: 20px;
-    font-size: 1.8em;
+    font-size: 20px;
 }
 
 .reset-btn {

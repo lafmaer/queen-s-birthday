@@ -72,6 +72,14 @@ const SoundSystem = {
             sound.play().catch(e => console.log('Audio play failed:', e));
         }
     },
+
+     playCel: function(soundName) {
+        const audio = document.getElementById(soundName + 'Sound');
+        if (audio) {
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('Audio play error:', e));
+        }
+    },
     
     playBeep: function(frequency, duration, volume = 0.1) {
         try {
@@ -357,6 +365,55 @@ function checkCode() {
     openSafe();
 }
 
+// Функция создания конфетти
+function createConfetti() {
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#c44569', '#a85b74', '#d2a6a6', '#e8c4c4', '#f8d7d7', '#8d4a5f', '#b86b87'];
+    const shapes = ['circle', 'square', 'triangle', 'rectangle'];
+    
+    // Создаем 150 конфетти
+    for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        
+        confetti.className = `confetti-piece ${shape}`;
+        
+        // Случайные свойства
+        const left = Math.random() * 100;
+        const animationDelay = Math.random() * 2;
+        const size = 5 + Math.random() * 10;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Применяем стили
+        confetti.style.left = `${left}vw`;
+        confetti.style.animationDelay = `${animationDelay}s`;
+        confetti.style.width = `${size}px`;
+        confetti.style.height = shape === 'triangle' ? '0' : `${size}px`;
+        
+        if (shape === 'triangle') {
+            confetti.style.borderBottom = `${size}px solid ${color}`;
+        } else {
+            confetti.style.background = color;
+        }
+        
+        // Добавляем в контейнер
+        container.appendChild(confetti);
+        
+        // Удаляем конфетти после анимации
+        setTimeout(() => {
+            if (confetti.parentNode) {
+                confetti.parentNode.removeChild(confetti);
+            }
+        }, 7000);
+    }
+}
+
+// Функция остановки конфетти
+function stopConfetti() {
+    const container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+}
+
 function openSafe() {
     const safeDoor = document.getElementById('safeDoor');
     const safeHandle = document.getElementById('safeHandle');
@@ -368,9 +425,13 @@ function openSafe() {
     safeHandle.classList.add('clicked');
     
     SoundSystem.playBeep(800, 0.2, 0.3);
-    setTimeout(() => {
-        SoundSystem.playBeep(600, 0.2, 0.2);
-    }, 200);
+    // setTimeout(() => {
+    //     SoundSystem.playBeep(600, 0.2, 0.2);
+    // }, 200);
+
+     setTimeout(() => {
+        SoundSystem.playCel('celebration');
+    }, 2000);
     
 
     setTimeout(() => {
@@ -385,7 +446,8 @@ function openSafe() {
         setTimeout(() => {
             safeDoor.style.display = 'none';
             safeInside.classList.add('show');
-            giftText.textContent = gameConfig.giftMessage;
+            // giftText.textContent = gameConfig.giftMessage;
+             createConfetti();
             
             setTimeout(() => {
                 SoundSystem.playBeep(1500, 0.3, 0.3);
@@ -399,6 +461,7 @@ function resetGame() {
     SoundSystem.playBeep(500, 0.2, 0.3);
     
     if (confirm('Точно хочешь начать заново? Весь прогресс будет потерян!')) {
+         stopConfetti();
         SaveSystem.clear();
         
         gameConfig.tasks.forEach(task => {
